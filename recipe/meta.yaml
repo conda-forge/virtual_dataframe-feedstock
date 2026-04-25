@@ -12,7 +12,7 @@ source:
 
 build:
   noarch: python
-  number: 0
+  number: 1
   script_env:
     - SETUPTOOLS_SCM_PRETEND_VERSION={{ version }}
   script: {{ PYTHON }} -m pip install . -vv
@@ -21,12 +21,12 @@ build:
 
 requirements:
   host:
-    - python >=3.8
+    - python {{ python_min }}
     - pip >=22.3
     - setuptools_scm
 
   run:
-    - python >=3.8
+    - python >={{ python_min }}
     - python-dotenv >=0.20
     - pandas >=1.4
     - GPUtil >=1.4.0
@@ -38,6 +38,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home:    https://github.com/pprados/virtual_dataframe
